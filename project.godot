@@ -10,14 +10,14 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Evaluator",
+"language": "GDScript",
+"path": "res://Evaluator.gd"
+}, {
+"base": "Reference",
 "class": "Move",
 "language": "GDScript",
 "path": "res://Scripts/Move.gd"
-}, {
-"base": "Reference",
-"class": "One",
-"language": "GDScript",
-"path": "res://Scripts/Actions/One/One.gd"
 }, {
 "base": "Reference",
 "class": "State",
@@ -30,8 +30,8 @@ _global_script_classes=[ {
 "path": "res://Scripts/Successor.gd"
 } ]
 _global_script_class_icons={
+"Evaluator": "",
 "Move": "",
-"One": "",
 "State": "",
 "Successor": ""
 }

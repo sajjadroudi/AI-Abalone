@@ -106,3 +106,16 @@ func test_board():
 		if neighbors[i][DL] != -1:
 			if neighbors[neighbors[i][DL]][UR] != i:
 				print("Incorrect Down Left Neighbor: ", i, ", ", neighbors[neighbors[i][DL]][UR])
+
+func get_marbles(board, piece):
+	var result = []
+	for i in range(61):
+		if board[i] == piece:
+			result.append(i)
+	return result
+	
+func get_enemy(piece):
+	if piece == BLACK:
+		return WHITE
+	else:
+		return BLACK
