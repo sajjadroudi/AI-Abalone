@@ -2,8 +2,11 @@ extends Node
 
 var current_board = []
 var neighbors = {}
+var current_player = BLACK
 enum {EMPTY, BLACK, WHITE} # used to represent the board
 enum {L, UL, UR, R, DR, DL} # used to represent the directions of neighbors
+
+var old_boards = [null, null, null, null, null] # used to hold last five boards to prevent loops
 
 func _ready():
 	init_board()
@@ -119,3 +122,31 @@ func get_enemy(piece):
 		return WHITE
 	else:
 		return BLACK
+
+func get_score(board, piece):
+	var enemy_piece = get_enemy(piece)
+	var count = 0
+	for item in board:
+		if item == enemy_piece:
+			count += 1
+	return 14 - count
+
+func turn():
+	current_player = get_enemy(current_player)
+	
+func get_current_state():
+	return State.new(
+		current_board,
+		get_score(current_board, BLACK),
+		get_score(current_board, WHITE)
+	)
+	
+func update_board(new_board):
+	for i in range(len(old_boards) - 1):
+		old_boards[i] = old_boards[i + 1]
+	
+	old_boards[len(old_boards) - 1] = current_board
+	current_board = new_board
+	
+func check_loop(board):
+	return old_boards[0] == board

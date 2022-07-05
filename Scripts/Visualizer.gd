@@ -7,8 +7,24 @@ var black_piece = preload("res://Scenes/Black Piece.tscn")
 
 func _ready():
 	draw_complete_board(BoardManager.current_board)
+	play()
+	
+func _process(delta):
+	play()
+	
+func play():
+	var state = BoardManager.get_current_state()
+	var action = Minimax.minimax_decision(state, BoardManager.current_player)
+	print("action: ", action.cell_number, " ", action.piece, " ", action.cluster_length, " ", action.cluster_direction, " ", action.move_direction, " ", action.status)
+	print("current: ", BoardManager.current_player)
+	Move.execute(state, action.cell_number, action.piece, action.cluster_length, action.cluster_direction, action.move_direction, action.status)
+	update_board(state.board)
+	
+	BoardManager.turn()
 	
 func update_board(new_board):
+	BoardManager.update_board(new_board)
+	
 	for child in pieces.get_children():
 		child.queue_free()
 	

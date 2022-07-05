@@ -10,9 +10,24 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Action",
+"language": "GDScript",
+"path": "res://Scripts/Action.gd"
+}, {
+"base": "Reference",
 "class": "Evaluator",
 "language": "GDScript",
-"path": "res://Evaluator.gd"
+"path": "res://Scripts/Evaluator.gd"
+}, {
+"base": "Reference",
+"class": "Helper",
+"language": "GDScript",
+"path": "res://Scripts/Helper.gd"
+}, {
+"base": "Reference",
+"class": "Minimax",
+"language": "GDScript",
+"path": "res://Scripts/Minimax.gd"
 }, {
 "base": "Reference",
 "class": "Move",
@@ -30,7 +45,10 @@ _global_script_classes=[ {
 "path": "res://Scripts/Successor.gd"
 } ]
 _global_script_class_icons={
+"Action": "",
 "Evaluator": "",
+"Helper": "",
+"Minimax": "",
 "Move": "",
 "State": "",
 "Successor": ""

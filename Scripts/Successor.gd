@@ -15,5 +15,9 @@ static func calculate_successor(state, piece): # calculates all the successor st
 							if legal_status["move is legal"] == true:
 								var new_state = State.new(state.board, state.black_score, state.white_score)
 								Move.execute(new_state, cell_number, piece, cluster_length, cluster_direction, move_direction, legal_status)
-								result.append(new_state)
+								var item = {
+									"action": Action.new(cell_number, piece, cluster_length, cluster_direction, move_direction, legal_status),
+									"state": new_state
+								}
+								result.append(item)
 	return result
