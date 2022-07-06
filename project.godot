@@ -25,11 +25,6 @@ _global_script_classes=[ {
 "path": "res://Scripts/Evaluator.gd"
 }, {
 "base": "Reference",
-"class": "Helper",
-"language": "GDScript",
-"path": "res://Scripts/Helper.gd"
-}, {
-"base": "Reference",
 "class": "Minimax",
 "language": "GDScript",
 "path": "res://Scripts/Minimax.gd"
@@ -58,7 +53,6 @@ _global_script_class_icons={
 "Action": "",
 "CutoffTest": "",
 "Evaluator": "",
-"Helper": "",
 "Minimax": "",
 "Move": "",
 "PruningMinimax": "",

@@ -6,11 +6,8 @@ var current_player = BLACK
 enum {EMPTY, BLACK, WHITE} # used to represent the board
 enum {L, UL, UR, R, DR, DL} # used to represent the directions of neighbors
 
-var old_boards = [null, null, null, null, null] # used to hold last five boards to prevent loops
-
 func _ready():
 	init_board()
-	# test_board()
 
 func init_board():
 	var file = File.new()
@@ -84,32 +81,6 @@ func get_stats(board, cell_number, piece, cluster_length, cluster_direction):
 			"piece has space" : piece_has_space, "opponent has space" : opponent_has_space, 
 			"is sandwich" : is_sandwich}
 	
-func test_board():
-	for i in range(61):
-		if neighbors[i][L] != -1: # check the correctness of left neighbors
-			if neighbors[neighbors[i][L]][R] != i:
-				print("Incorrect Left Neighbor: ", i, ", ", neighbors[neighbors[i][L]][R])
-				
-		if neighbors[i][UL] != -1: # check the correctness of up left neighbors
-			if neighbors[neighbors[i][UL]][DR] != i:
-				print("Incorrect Up Left Neighbor: ", i, ", ", neighbors[neighbors[i][UL]][DR])
-		
-		if neighbors[i][UR] != -1: # check the correctness of up right neighbors
-			if neighbors[neighbors[i][UR]][DL] != i:
-				print("Incorrect Up Right Neighbor: ", i, ", ", neighbors[neighbors[i][UR]][DL])
-				
-		if neighbors[i][R] != -1: # check the correctness of right neighbors
-			if neighbors[neighbors[i][R]][L] != i:
-				print("Incorrect Right Neighbor: ", i, ", ", neighbors[neighbors[i][R]][L])
-				
-		if neighbors[i][DR] != -1: # check the correctness of down right neighbors
-			if neighbors[neighbors[i][DR]][UL] != i:
-				print("Incorrect Down Right Neighbor: ", i, ", ", neighbors[neighbors[i][DR]][UL])
-				
-		if neighbors[i][DL] != -1:
-			if neighbors[neighbors[i][DL]][UR] != i:
-				print("Incorrect Down Left Neighbor: ", i, ", ", neighbors[neighbors[i][DL]][UR])
-
 func get_marbles(board, piece):
 	var result = []
 	for i in range(61):
@@ -142,11 +113,5 @@ func get_current_state():
 	)
 	
 func update_board(new_board):
-	for i in range(len(old_boards) - 1):
-		old_boards[i] = old_boards[i + 1]
-	
-	old_boards[len(old_boards) - 1] = current_board
 	current_board = new_board
-	
-func check_loop(board):
-	return old_boards[0] == board
+

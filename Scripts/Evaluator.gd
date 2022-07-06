@@ -20,9 +20,9 @@ static func eval(state, piece):
 
 static func game_result(marbles, enemy_marbles):
 	if len(marbles) == 8:
-		return -10000000
+		return -100000
 	elif len(enemy_marbles) == 8:
-		return 10000000
+		return 100000
 	else:
 		return 0
 		
