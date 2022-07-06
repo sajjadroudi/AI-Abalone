@@ -7,13 +7,16 @@ var black_piece = preload("res://Scenes/Black Piece.tscn")
 
 func _ready():
 	draw_complete_board(BoardManager.current_board)
-	play()
 	
 func _process(delta):
 	play()
 	
 func play():
 	var state = BoardManager.get_current_state()
+	
+	if CutoffTest.is_terminal(state):
+		return
+	
 	#var action = Minimax.minimax_decision(state, BoardManager.current_player)
 	var action = PruningMinimax.alpha_beta_search(state, BoardManager.current_player, true)
 	print("action: ", action.cell_number, " ", action.piece, " ", action.cluster_length, " ", action.cluster_direction, " ", action.move_direction, " ", action.status)

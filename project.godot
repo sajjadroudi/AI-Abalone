@@ -15,11 +15,6 @@ _global_script_classes=[ {
 "path": "res://Scripts/Action.gd"
 }, {
 "base": "Reference",
-"class": "CutoffTest",
-"language": "GDScript",
-"path": "res://Scripts/CutoffTest.gd"
-}, {
-"base": "Reference",
 "class": "Evaluator",
 "language": "GDScript",
 "path": "res://Scripts/Evaluator.gd"
@@ -51,7 +46,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
-"CutoffTest": "",
 "Evaluator": "",
 "Minimax": "",
 "Move": "",
@@ -70,6 +64,7 @@ config/icon="res://icon.png"
 
 BoardManager="*res://Scripts/BoardManager.gd"
 History="*res://Scripts/History.gd"
+CutoffTest="*res://Scripts/CutoffTest.gd"
 
 [gdnative]
 
