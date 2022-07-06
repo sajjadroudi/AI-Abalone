@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Action.gd"
 }, {
 "base": "Reference",
+"class": "CutoffTest",
+"language": "GDScript",
+"path": "res://Scripts/CutoffTest.gd"
+}, {
+"base": "Reference",
 "class": "Evaluator",
 "language": "GDScript",
 "path": "res://Scripts/Evaluator.gd"
@@ -35,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Move.gd"
 }, {
 "base": "Reference",
+"class": "PruningMinimax",
+"language": "GDScript",
+"path": "res://Scripts/PruningMinimax.gd"
+}, {
+"base": "Reference",
 "class": "State",
 "language": "GDScript",
 "path": "res://Scripts/State.gd"
@@ -46,10 +56,12 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
+"CutoffTest": "",
 "Evaluator": "",
 "Helper": "",
 "Minimax": "",
 "Move": "",
+"PruningMinimax": "",
 "State": "",
 "Successor": ""
 }

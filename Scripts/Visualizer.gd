@@ -14,7 +14,8 @@ func _process(delta):
 	
 func play():
 	var state = BoardManager.get_current_state()
-	var action = Minimax.minimax_decision(state, BoardManager.current_player)
+	#var action = Minimax.minimax_decision(state, BoardManager.current_player)
+	var action = PruningMinimax.alpha_beta_search(state, BoardManager.current_player)
 	print("action: ", action.cell_number, " ", action.piece, " ", action.cluster_length, " ", action.cluster_direction, " ", action.move_direction, " ", action.status)
 	print("current: ", BoardManager.current_player)
 	Move.execute(state, action.cell_number, action.piece, action.cluster_length, action.cluster_direction, action.move_direction, action.status)
