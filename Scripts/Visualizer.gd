@@ -19,11 +19,14 @@ func play():
 	print("action: ", action.cell_number, " ", action.piece, " ", action.cluster_length, " ", action.cluster_direction, " ", action.move_direction, " ", action.status)
 	print("current: ", BoardManager.current_player)
 	Move.execute(state, action.cell_number, action.piece, action.cluster_length, action.cluster_direction, action.move_direction, action.status)
+	
 	update_board(state.board)
 	
 	BoardManager.turn()
 	
 func update_board(new_board):
+	History.push(new_board)
+	
 	BoardManager.update_board(new_board)
 	
 	for child in pieces.get_children():
