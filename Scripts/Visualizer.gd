@@ -6,10 +6,20 @@ var white_piece = preload("res://Scenes/White Piece.tscn")
 var black_piece = preload("res://Scenes/Black Piece.tscn")
 
 func _ready():
+	History.push(BoardManager.current_board)
 	draw_complete_board(BoardManager.current_board)
 	
 func _process(delta):
 	play()
+
+func _input(ev):
+	var state = BoardManager.get_current_state()
+	
+	if CutoffTest.is_terminal(state):
+		if Input.is_key_pressed(KEY_LEFT):
+			clean_and_draw_board(History.prev())
+		elif Input.is_key_pressed(KEY_RIGHT):
+			clean_and_draw_board(History.next())
 	
 func play():
 	var state = BoardManager.get_current_state()
@@ -19,8 +29,6 @@ func play():
 	
 	#var action = Minimax.minimax_decision(state, BoardManager.current_player)
 	var action = PruningMinimax.alpha_beta_search(state, BoardManager.current_player, true)
-	print("action: ", action.cell_number, " ", action.piece, " ", action.cluster_length, " ", action.cluster_direction, " ", action.move_direction, " ", action.status)
-	print("current: ", BoardManager.current_player)
 	Move.execute(state, action.cell_number, action.piece, action.cluster_length, action.cluster_direction, action.move_direction, action.status)
 	
 	update_board(state.board)
@@ -29,13 +37,14 @@ func play():
 	
 func update_board(new_board):
 	History.push(new_board)
-	
 	BoardManager.update_board(new_board)
+	clean_and_draw_board(new_board)
 	
+func clean_and_draw_board(board):
 	for child in pieces.get_children():
 		child.queue_free()
 	
-	draw_complete_board(new_board)
+	draw_complete_board(board)
 
 func draw_complete_board(board):
 	var coordinates = Vector3(0, 0, 0)
