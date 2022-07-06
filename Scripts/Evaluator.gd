@@ -8,21 +8,23 @@ static func eval(state, piece):
 	var enemy_marbles = BoardManager.get_marbles(state.board, enemy_piece)
 	
 	var result = 0
-	result += 1000000 * game_result(marbles, enemy_marbles)
+	result += 10000000 * game_result(marbles, enemy_marbles)
+	result += 20 * attack_situation(state, piece)
+	result += -20 * attack_situation(state, enemy_piece)
 	result += 100 * len(marbles)
-	result += 5 * center(marbles) # I'm not sure about weight
-	result += 1000 * grouping(state, piece)
-	result += -1000 * grouping(state, enemy_piece)
-	result += 15 * attack(state, piece)
-	result += -15 * attack(state, enemy_piece)
+	result += 1000 * grouping_marbles(marbles, piece)
+	result += -1000 * grouping_marbles(enemy_marbles, enemy_piece)
+	result += 10 * centralize(marbles) # I'm not sure about weight
+	#result += 1000 * grouping(state, piece)
+	#result += -1000 * grouping(state, enemy_piece)
 	
 	return result
 
 static func game_result(marbles, enemy_marbles):
 	if len(marbles) == 8:
-		return -100000
+		return -1
 	elif len(enemy_marbles) == 8:
-		return 100000
+		return 1
 	else:
 		return 0
 		
@@ -37,8 +39,17 @@ static func grouping(state, piece):
 				if BoardManager.check_cluster(state.board, cell_number, piece, cluster_length, cluster_direction):
 					score += cluster_length
 	return score
+	
+static func grouping_marbles(marbles, piece):
+	var count = 0
+	for marble in marbles:
+		for neighbor in BoardManager.neighbors[marble]:
+			if neighbor == piece:
+				count += 1
+	return count
+		
 
-static func attack(state, piece):
+static func attack_situation(state, piece):
 	var score = 0
 	for cell_number in range(len(state.board)):
 		if state.board[cell_number] == piece:
@@ -69,7 +80,7 @@ static func attack(state, piece):
 										score += 1
 	return score
 
-static func center(marbles):
+static func centralize(marbles):
 	var score = 0
 	for marble in marbles:
 		if marble in [6, 7, 8, 9, 16, 24, 33, 41, 48, 54, 53, 52, 51, 44, 36, 27, 19, 12]:
