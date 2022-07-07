@@ -2,7 +2,7 @@ extends Node
 
 var history = []
 
-var current_pos = 0
+var current_pos = -1
 
 func push(board):
 	history.append(board)
